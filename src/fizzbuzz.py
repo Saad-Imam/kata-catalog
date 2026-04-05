@@ -15,8 +15,15 @@ class TestFizzBuzz(unittest.TestCase):
         self.assertEqual(fizzbuzzHelper(1), '1')
         self.assertEqual(fizzbuzzHelper(2), '2')
         self.assertEqual(fizzbuzzHelper(4), '4')
+        
+        
+    def test_divbyzero(self):
+        with self.assertRaises(ZeroDivisionError):
+            fizzbuzzHelper(0)
 
 def fizzbuzzHelper(n):
+    if n == 0:
+        raise ZeroDivisionError("Cannot divide by zero")
     if n % 3 == 0 and n % 5 == 0:
         return "FizzBuzz"
     elif n % 3 == 0:
@@ -26,10 +33,11 @@ def fizzbuzzHelper(n):
     else:
         return str(n)
 
-def fizzbuzz(n):
-    for i in range(1, n + 1):
+def fizzbuzz():
+    for i in range(1, 101):
         print(fizzbuzzHelper(i))
 
 if __name__ == '__main__':
-    unittest.main()
-    fizzbuzz(10000000000000000000000000)
+    #unittest.main()
+    #fizzbuzz()
+    fizzbuzzHelper(-3)
