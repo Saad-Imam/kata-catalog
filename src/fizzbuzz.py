@@ -1,5 +1,8 @@
 import unittest
 
+class NegativeFizzBuzz(Exception):
+    pass
+
 class TestFizzBuzz(unittest.TestCase):
 
     def test_divisible_by_3(self):
@@ -20,8 +23,13 @@ class TestFizzBuzz(unittest.TestCase):
     def test_divbyzero(self):
         with self.assertRaises(ZeroDivisionError):
             fizzbuzzHelper(0)
+    def test_divbyneg(self):
+        with self.assertRaises(NegativeFizzBuzz):
+            fizzbuzzHelper(-3)
 
 def fizzbuzzHelper(n):
+    if n < 0:
+        raise NegativeFizzBuzz("Negative numbers are not accepted")
     if n == 0:
         raise ZeroDivisionError("Cannot divide by zero")
     if n % 3 == 0 and n % 5 == 0:
@@ -38,6 +46,6 @@ def fizzbuzz():
         print(fizzbuzzHelper(i))
 
 if __name__ == '__main__':
-    #unittest.main()
+    unittest.main()
     #fizzbuzz()
-    fizzbuzzHelper(-3)
+    
